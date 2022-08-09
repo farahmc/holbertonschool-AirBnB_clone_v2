@@ -226,11 +226,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)
@@ -243,7 +243,7 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        for k, v in storage._FileStorage__objects.items():
+        for k, v in storage.all().items():
             if args == k.split('.')[0]:
                 count += 1
         print(count)
@@ -256,7 +256,6 @@ class HBNBCommand(cmd.Cmd):
         """ Updates a certain object with new info """
         c_name = c_id = att_name = att_val = kwargs = ''
 
-        print("*****I WAS CALLED TO UPDATE*****")
         # isolate cls from id/args, ex: (<cls>, delim, <id/args>)
         args = args.partition(" ")
         if args[0]:
