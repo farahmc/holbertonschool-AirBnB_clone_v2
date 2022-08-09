@@ -10,6 +10,7 @@ from models.place import Place
 from models.review import Review
 from models.user import User
 from models.amenity import Amenity
+import models
 
 
 class DBStorage:
@@ -35,27 +36,19 @@ class DBStorage:
         if cls=None
         query all types of objects"""
         db_dict = {}
-        objects_list = {User, State, City, Amenity, Place, Review}
+        objects_list = {"User": User,
+                   "Place": Place, "City": City,
+                   "State": State,
+                   "Review": Review}
+
         if cls is not None:
-            for cls in objects_list:
-                result = self.__session.query(cls).all()
-                for obj in result:
-                    key = obj.__class__.__name__ + '.' + obj.id
-                    db_dict[key] = obj
+           objects_list = {cls}
+        for cls in objects_list:
+            result = self.__session.query(objects_list[cls]).all()
+            for obj in result:
+                key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                db_dict[key] = obj
         return db_dict
-
-    """
-    if cls is None:
-        for obj in self.__session.query(User, State, City, Amenity, Place, Review).all():
-            key = obj.__class__.__name__ + '.' + obj.id
-            db_dict[key] = obj
-    else:
-        for obj in self.__session.query(cls).all():
-            key = obj.cls.__name__ + '.' + obj.id
-            db_dict[key] = obj
-    return db_dict
-    """
-
 
     def new(self, obj):
         """add the object to the current database session"""
