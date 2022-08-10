@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
-            print('(hbnb)')
+            print('(hbnb) ', end='')
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
@@ -134,9 +134,7 @@ class HBNBCommand(cmd.Cmd):
                 key = items.partition('=')[0]
                 value = items.partition('=')[2]
 
-                value = verify_params(value)
-                if type(value) == str:
-                    value[0] == '"' and value[-1] == '"':
+                if value[0] == '"' and value[-1] == '"':
                     value = value.strip('"')
                     value = value.replace('_', ' ')
                     setattr(new_instance, key, value)
