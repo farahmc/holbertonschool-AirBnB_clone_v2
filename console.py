@@ -125,6 +125,7 @@ class HBNBCommand(cmd.Cmd):
         if not args[2]:
             new_instance.save()
             print(new_instance.id)
+            storage.save()
             return
 
         params = args[2].split()
@@ -151,6 +152,7 @@ class HBNBCommand(cmd.Cmd):
 
         new_instance.save()
         print(new_instance.id)
+        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
