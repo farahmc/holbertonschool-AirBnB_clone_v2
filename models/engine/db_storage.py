@@ -37,12 +37,12 @@ class DBStorage:
         query all types of objects"""
         db_dict = {}
         objects_list = {"User": User,
-                   "Place": Place, "City": City,
-                   "State": State,
-                   "Review": Review}
+                        "Place": Place, "City": City,
+                        "State": State,
+                        "Review": Review}
 
         if cls is not None:
-           objects_list = {cls}
+            objects_list = {cls}
         for cls in objects_list:
             result = self.__session.query(objects_list[cls]).all()
             for obj in result:
