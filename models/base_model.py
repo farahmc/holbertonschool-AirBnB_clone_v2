@@ -8,6 +8,7 @@ import models
 
 Base = declarative_base()
 
+
 class BaseModel:
     """A base class for all hbnb models"""
     __tablename__ = "cities"
@@ -22,15 +23,26 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            for key, val in kwargs.items():
-                if "__class__" not in key:
-                    setattr(self, key, val)
+            try:
+                kwargs['updated_at'] = datetime.strptime(
+                        kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['created_at'] = datetime.strptime(
+                        kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
 
-            del kwargs['__class__']
+                for key, val in kwargs.items():
+                    if "__class__" not in key:
+                        setattr(self, key, val)
+
+            except KeyError as new:
+                self.id = str(uuid.uuid4())
+                self.updated_at = datetime.now()
+                self.created_at = datetime.now()
+
+            try:
+                del kwargs['__class__']
+            except KeyError as new:
+                pass
+
             self.__dict__.update(kwargs)
 
     def __str__(self):
