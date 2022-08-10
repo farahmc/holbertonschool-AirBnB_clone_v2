@@ -13,7 +13,7 @@ place_amenity = Table('place_amenity', metaData,
                       Column('place_id', String(60),
                              ForeignKey('places.id'), primary_key=True,
                              nullable=False),
-                      Column('amenity.id', String(60),
+                      Column('amenity_id', String(60),
                              ForeignKey('amenities.id'), primary_key=True,
                              nullable=False))
 
@@ -54,7 +54,7 @@ class Place(BaseModel, Base):
             """ getter returns the list of amenity instances """
             amenities_list = []
             for instance in models.storage.all(Amenity).values():
-                if amenity.id in self.amenity_ids:
+                if amenity_ids == Amenity.id:
                     amenities_list.append(instance)
             return amenities_list
 
