@@ -12,18 +12,15 @@ def do_deploy(archive_path):
     if os.path.exists(archive_path):
         return False
     try:
-        """ upload archive & uncompress"""
         put(archive_path, "/tmp/")
         archive_path_split = archive_path.split("/")[1]
         filename = archive_path_split.split(".")[0]
         run("mkdir -p /data/web_static/releases/{}".format(filename))
         run("tar -xf /tmp/{} -C /data/web_static/releases/{}".
-            format(archive_path_split, filename)
+            format(archive_path_split, filename))
 
-        """ delete archive """
         run("rm /tmp/{}".format(archive_path_split))
 
-        """ delete symlink """
         run("rm -rf /data/web_static/current")
 
     except:
