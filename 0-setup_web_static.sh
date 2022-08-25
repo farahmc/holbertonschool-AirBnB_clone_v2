@@ -6,13 +6,15 @@ apt-get -y update
 apt-get -y install nginx
 service nginx start
 
-# create directories & set user/group permissions
+# create directories
 mkdir -p "/data/web_static/releases/test/"
 mkdir -p "/data/web_static/shared/"
-chown -R ubuntu:ubuntu /data/
 
 # create symlink (delete if exists first)
 ln -s -f -n /data/web_static/releases/test/ /data/web_static/current
+
+# set permissions
+chown -R ubuntu:ubuntu /data/
 
 # create a & populate dummy index
 printf "Success!" > /data/web_static/releases/test/index.html
