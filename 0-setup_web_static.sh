@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# sets up your web servers for the deployment of web_static
+0;136;0c# sets up your web servers for the deployment of web_static
 
 # install nginx
 apt-get -y update
@@ -7,14 +7,14 @@ apt-get -y install nginx
 service nginx start
 
 # create directories
-mkdir -p "/data/web_static/releases/test/"
-mkdir -p "/data/web_static/shared/"
+mkdir -p "/data/web_static/releases/test"
+mkdir -p "/data/web_static/shared"
 
 # create symlink (delete if exists first)
 ln -s -f -n /data/web_static/releases/test/ /data/web_static/current
 
 # create a & populate dummy index
-printf "Success!" > /data/web_static/releases/test/index.html
+printf "Success!\n" > /data/web_static/releases/test/index.html
 
 # set permissions
 chown -R ubuntu:ubuntu /data/
