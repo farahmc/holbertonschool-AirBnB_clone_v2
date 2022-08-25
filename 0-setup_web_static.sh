@@ -20,6 +20,6 @@ printf "Success!\n" > /data/web_static/releases/test/index.html
 chown -R ubuntu:ubuntu /data/
 
 # update nginx config
-sed -i '/add_header X-Served-By/a location /hbnb_static { \n\t\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-available/default
+sed -i '/listen 80 default_server;/a location /hbnb_static { \n\t\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-available/default
 
 service nginx restart
