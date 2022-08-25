@@ -18,6 +18,6 @@ ln -s -f -n /data/web_static/releases/test/ /data/web_static/current
 printf "Success!" > /data/web_static/releases/test/index.html
 
 # update nginx config
-sed -i '/add_header X-Served-By/a \nlocation /hbnb_static { \n\t\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-available/default
+sed -i '/add_header X-Served-By/a location /hbnb_static { \n\t\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-available/default
 
 service nginx restart
