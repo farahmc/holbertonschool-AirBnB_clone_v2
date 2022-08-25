@@ -19,7 +19,7 @@ def do_deploy(archive_path):
         filename = archive_path_split.split(".")[0]
         directory = "/data/web_static/releases/" + filename
         run("mkdir -p {}".format(directory))
-        run("tar -xf /tmp/{} -C {}".
+        run("tar -xzf /tmp/{} -C {}".
             format(archive_path_split, directory))
 
         """ delete archive """
