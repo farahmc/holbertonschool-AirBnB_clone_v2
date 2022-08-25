@@ -12,7 +12,7 @@ def do_deploy(archive_path):
         return False
     try:
         """ upload archive """
-        put(archive_path, "tmp")
+        put(archive_path, "/tmp/")
 
         """ create directory and uncompress """
         archive_path_split = archive_path.split("/")[-1]
