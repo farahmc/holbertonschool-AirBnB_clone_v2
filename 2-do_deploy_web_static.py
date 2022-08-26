@@ -16,7 +16,7 @@ def do_deploy(archive_path):
 
         """ create directory and uncompress """
         archive = archive_path.split("/")[-1]
-        filename = archive_path_split.split(".")[0]
+        filename = archive.split(".")[0]
         directory = "/data/web_static/releases/" + filename
         run("mkdir -p {}/".format(directory))
         run("tar -xzf /tmp/{} -C {}/".format(archive, directory))
