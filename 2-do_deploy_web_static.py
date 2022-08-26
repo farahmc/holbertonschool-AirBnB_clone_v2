@@ -18,8 +18,8 @@ def do_deploy(archive_path):
         archive = archive_path.split("/")[-1]
         filename = archive_path_split.split(".")[0]
         directory = "/data/web_static/releases/" + filename
-        run("mkdir -p {}".format(directory))
-        run("tar -xzf /tmp/{} -C {}".format(archive, directory))
+        run("mkdir -p {}/".format(directory))
+        run("tar -xzf /tmp/{} -C {}/".format(archive, directory))
 
         """ move subdirectory into correct directory"""
         run("mv {0}/web_static/* {0}".format(directory))
@@ -29,8 +29,8 @@ def do_deploy(archive_path):
         run("rm -rf {}/web_static".format(directory))
 
         """ delete old symlink & create new symlink """
-        run("rm -rf /data/web_static/current/")
-        run("ln -s {} /data/web_static/current".format(directory))
+        run("rm -rf /data/web_static/current")
+        run("ln -s {}/ /data/web_static/current".format(directory))
 
     except:
         return False
