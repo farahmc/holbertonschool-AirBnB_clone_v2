@@ -15,22 +15,23 @@ def do_deploy(archive_path):
         put(archive_path, "/tmp/")
 
         """ create directory and uncompress """
-        archive_path_split = archive_path.split("/")[-1]
+        archive = archive_path.split("/")[-1]
         filename = archive_path_split.split(".")[0]
-        directory = "/data/web_static/releases/" + filename + "/"
+        directory = "/data/web_static/releases/" + filename
         run("mkdir -p {}".format(directory))
         run("tar -xzf /tmp/{} -C {}".
-            format(archive_path_split, directory))
+            format(archive, directory))
 
         """ move subdirectory into correct directory"""
         run("mv {0}/web_static/* {0}".format(directory))
 
         """ delete archive & directory"""
-        run("rm /tmp/{}".format(archive_path_split))
+        run("rm /tmp/{}".format(archive))
         run("rm -rf {}/web_static".format(directory))
 
-        """ force create new symlink"""
-        run("ln -s -f {} /data/web_static/current".format(directory))
+        """ delete old symlink & create new symlink """
+        run("rm -rf /data/web_static/current/")
+        run("ln -s {} /data/web_static/current".format(directory))
 
     except:
         return False
