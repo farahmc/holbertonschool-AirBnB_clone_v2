@@ -19,8 +19,7 @@ def do_deploy(archive_path):
         filename = archive_path_split.split(".")[0]
         directory = "/data/web_static/releases/" + filename
         run("mkdir -p {}".format(directory))
-        run("tar -xzf /tmp/{} -C {}".
-            format(archive, directory))
+        run("tar -xzf /tmp/{} -C {}".format(archive, directory))
 
         """ move subdirectory into correct directory"""
         run("mv {0}/web_static/* {0}".format(directory))
