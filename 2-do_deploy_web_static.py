@@ -22,10 +22,14 @@ def do_deploy(archive_path):
         run("tar -xzf /tmp/{} -C {}".
             format(archive_path_split, directory))
 
-        """ delete archive """
-        run("rm /tmp/{}".format(archive_path_split))
+        """ move subdirectory into correct directory"""
+        run("mv {0}/web_static/* {0}".format(directory))
 
-        """ delete symlink & create new symlink"""
+        """ delete archive & directory"""
+        run("rm /tmp/{}".format(archive_path_split))
+        run("rm -rf {}/web_static".format(directory))
+
+        """ force create new symlink"""
         run("ln -s -f {} /data/web_static/current".format(directory))
 
     except:
