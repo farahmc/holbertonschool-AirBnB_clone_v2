@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ script that starts a Flask web application.
 Your web application must be listening on 0.0.0.0, port 5000
-/number_template/<n>: display a HTML page only if n is an integer: """
+/number_odd_or_even/<n>: display a HTML page only if n is an integer:
+H1 tag: “Number: n is even|odd” inside the tag BODY """
 
 from flask import Flask
 from flask import render_template
