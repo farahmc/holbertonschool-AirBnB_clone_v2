@@ -3,6 +3,7 @@
 from sqlalchemy import create_engine, MetaData
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
+#from sqlalchemy.orm.session.Session import close
 from os import getenv
 from models.state import State
 from models.city import City
@@ -40,9 +41,11 @@ class DBStorage:
                         "Place": Place, "City": City,
                         "State": State,
                         "Review": Review}
-
+        
         if cls is not None:
-            objects_list = {cls}
+            delete = [k for k, v in objects_list.items() if v != cls]
+            for k in delete:
+                del objects_list[k]
         for cls in objects_list:
             result = self.__session.query(objects_list[cls]).all()
             for obj in result:
@@ -76,3 +79,7 @@ class DBStorage:
         Session = scoped_session(sessionmaker(bind=self.__engine,
                                               expire_on_commit=False))
         self.__session = Session()
+
+    def close(self):
+        """ close session """
+        self.__session.remove()

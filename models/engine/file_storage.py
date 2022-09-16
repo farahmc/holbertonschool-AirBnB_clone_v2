@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+B65;6800;1c#!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
 
@@ -64,3 +64,7 @@ class FileStorage:
                 del self.__objects[obj_key]
         else:
             pass
+
+    def close(self):
+        """ deserialize the JSON file to objects """
+        self.reload()
