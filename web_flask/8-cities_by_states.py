@@ -25,7 +25,7 @@ def states_list():
 @app.route("/cities_by_states", strict_slashes=False)
 def cities_by_states():
     """ display list of cities by state """
-    return render_template("8-cities_by_states.html", 
+    return render_template("8-cities_by_states.html",
                            state_dict=storage.all(State))
 
 
