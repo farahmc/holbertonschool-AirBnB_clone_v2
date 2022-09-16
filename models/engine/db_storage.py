@@ -3,7 +3,6 @@
 from sqlalchemy import create_engine, MetaData
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
-#from sqlalchemy.orm.session.Session import close
 from os import getenv
 from models.state import State
 from models.city import City
@@ -82,4 +81,4 @@ class DBStorage:
 
     def close(self):
         """ close session """
-        self.__session.remove()
+        self.__session.close()
