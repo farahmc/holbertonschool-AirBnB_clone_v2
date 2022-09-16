@@ -1,4 +1,4 @@
-B65;6800;1c#!/usr/bin/python3
+#!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
 
