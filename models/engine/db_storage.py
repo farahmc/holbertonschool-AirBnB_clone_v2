@@ -40,7 +40,7 @@ class DBStorage:
                         "Place": Place, "City": City,
                         "State": State,
                         "Review": Review}
-        
+
         if cls is not None:
             delete = [k for k, v in objects_list.items() if v != cls]
             for k in delete:
