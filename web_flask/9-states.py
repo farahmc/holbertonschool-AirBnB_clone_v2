@@ -24,21 +24,9 @@ def states_id(id=None):
     for state in state_dict:
         if id == state.id:
             match = state
-    return render_template('9-states.html', state_dict=state_dict, id=id, state=match)
+    return render_template('9-states.html', state_dict=state_dict, id=id,
+                           state=match)
 
-
-"""
-@app.route("/states/<id>", strict_slashes=False)
-def states_by_id(id):
-   
-    state_dict = storage.all(State)
-    try:
-        state = state_dict[id]
-        print(state)
-    except:
-        state = None
-    return render_template("9-states.html", state=state)
-"""
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
