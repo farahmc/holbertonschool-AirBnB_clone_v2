@@ -16,7 +16,7 @@ def shutdown_session(exception=None):
 
 
 @app.route("/states", strict_slashes=False)
-@app.route('/states/<id>', strict_slashes=False)
+@app.route("/states/<id>", strict_slashes=False)
 def states_id(id=None):
     """ displays all states or cities by state id"""
     state_dict = storage.all(State).values()
@@ -24,7 +24,7 @@ def states_id(id=None):
     for state in state_dict:
         if id == state.id:
             match = state
-    return render_template('9-states.html', state_dict=state_dict, id=id,
+    return render_template("9-states.html", state_dict=state_dict, id=id,
                            state=match)
 
 
